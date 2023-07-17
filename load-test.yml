@@ -1,0 +1,17 @@
+config:
+  target: 'http://localhost:3000'  # replace with your server's URL
+  phases:
+    - duration: 10 
+      arrivalRate: 3 
+scenarios:
+  - flow:
+    - post:  
+        url: 'http://localhost:3000/api/v1/cinema/1/seats/21/purchase'
+        afterResponse: "logResponse"
+
+# Define a custom function to log the response
+processor:
+  logResponse: (requestParams, response, context, ee, next) => {
+    console.log(response.body);
+    return next();  // you must call the callback function at the end
+    }

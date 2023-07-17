@@ -16,3 +16,5 @@ const sequelize = new Sequelize({
 
 
 sequelize.sync();
+
+export default sequelize;
