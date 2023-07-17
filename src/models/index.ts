@@ -1,9 +1,18 @@
-import sequelize from '../config/db';
+
+import { Sequelize } from 'sequelize-typescript';
 import { Cinema } from './cinema';
-sequelize.sync({ alter: true })
-  .then(() => {
-    console.log('Database synchronized');
-  })
-  .catch((error) => {
-    console.error('Failed to synchronize database:', error);
-  });
+import { Seat } from './seat';
+
+
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  host: 'localhost',
+  port: 32768,
+  database: 'postgres',
+  username: 'postgres',
+  password: 'postgrespw',
+  models: [Cinema,Seat], // Path to your model files
+});
+
+
+sequelize.sync();

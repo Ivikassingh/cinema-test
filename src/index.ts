@@ -1,13 +1,18 @@
 import express, { Application,Request, Response } from 'express';
 import sequelize  from './config/db';
+import router from './routes'; 
+import "./models/index"
 const app:Application = express();
 const port = 3000;
 // Body parsing Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.get('/', async(req: Request, res: Response): Promise<Response> => {
-    return res.status(200).send({ message: `Welcome to the cookbook API! \n Endpoints available at http://localhost:${port}/api/v1` })
+    return res.status(200).send({ message: `Welcome Cinema API` })
 })
+
+// Mount the user router
+app.use('/api/v1', router);
 
 sequelize.authenticate()
   .then(() => {
